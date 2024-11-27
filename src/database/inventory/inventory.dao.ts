@@ -13,14 +13,14 @@ export class InventoryDAO {
   // return the id of the item if in stock
   async checkStock(itemName: string): Promise<number> {
     const res = await this.queryRunner.query<Inventory>(
-      `SELECT * FROM inventory WHERE itemName = ?`,
+      `SELECT * FROM inventory WHERE "itemName" = $1`,
       [itemName],
     );
     return res.id;
   }
   async reduceStock(itemName: string): Promise<void> {
     await this.queryRunner.query<Inventory>(
-      `UPDATE inventory SET count = count - 1 WHERE "itemName" = ?`,
+      `UPDATE inventory SET count = count - 1 WHERE "itemName" = $1`,
       [itemName],
     );
   }

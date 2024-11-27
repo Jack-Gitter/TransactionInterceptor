@@ -11,5 +11,5 @@ export const postgresDataSource = new DataSource({
   database: 'test',
   entities: [Invoice, Inventory],
   subscribers: [],
-  migrations: ['./migrations'],
+  migrations: [`${__dirname}/migrations/*.js`],
 });
