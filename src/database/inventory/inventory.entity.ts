@@ -6,4 +6,6 @@ export class Inventory {
   id: number;
   @Column()
   itemName: string;
+  @Column()
+  count: number
 }

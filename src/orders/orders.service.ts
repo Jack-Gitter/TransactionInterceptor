@@ -10,9 +10,9 @@ export class OrdersService {
     private inventoryService: InventoryService,
     private invoiceService: InvoiceService,
   ) {}
-  async placeOrder() {
-    this.inventoryService.reduceStock();
+  async placeOrder(itemName: string, user: string, price: number) {
+    this.inventoryService.checkAndReduceStock(itemName);
     this.paymentService.chargePayment();
-    this.invoiceService.provideInvoice();
+    this.invoiceService.provideInvoice(user, price);
   }
 }

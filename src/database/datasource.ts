@@ -12,4 +12,4 @@ export const postgresDataSource = new DataSource({
   entities: [Invoice, Inventory],
   subscribers: [],
   migrations: ['./migrations'],
-}).initialize();
+});

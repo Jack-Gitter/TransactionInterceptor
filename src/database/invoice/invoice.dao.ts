@@ -8,5 +8,7 @@ export class InvoiceDAO {
   constructor(cls: ClsService, dataSource: DataSource) {
     this.queryRunner = cls.get('connection') ?? dataSource.manager;
   }
-  async addInvoice(): Promise<void> {}
+  async addInvoice(user: string, price: number): Promise<void> {
+    this.queryRunner.query(`INSERT INTO invoice values (?, ?)`, [user, price]);
+  }
 }
