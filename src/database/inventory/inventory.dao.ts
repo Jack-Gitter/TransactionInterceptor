@@ -13,7 +13,7 @@ export class InventoryDAO {
   // return the id of the item if in stock
   async checkStock(itemName: string): Promise<number> {
     const res = await this.queryRunner.query<Inventory>(
-      `SELECT * FROM inventory WHERE "itemName" = ?`,
+      `SELECT * FROM inventory WHERE itemName = ?`,
       [itemName],
     );
     return res.id;
