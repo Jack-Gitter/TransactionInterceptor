@@ -21,12 +21,12 @@ export class TransactionInterceptor implements NestInterceptor {
   ): Promise<Observable<any>> {
     console.log('in the interceptor');
     const queryRunner = this.dataSource.createQueryRunner();
-    queryRunner.connect();
+    await queryRunner.connect();
     await queryRunner.startTransaction();
     console.log('starting transaction');
     const manager = queryRunner.manager;
     this.cls.set('connection', manager);
-    next.handle().pipe(
+    return next.handle().pipe(
       tap({
         next: async (val) => {
           console.log('comitting transaction');
@@ -38,12 +38,7 @@ export class TransactionInterceptor implements NestInterceptor {
           await queryRunner.rollbackTransaction();
           throw error;
         },
-        finalize: async () => {
-          console.log('releasing');
-          await queryRunner.release();
-        },
       }),
     );
-    return next.handle();
   }
 }

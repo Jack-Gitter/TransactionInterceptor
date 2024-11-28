@@ -3,12 +3,12 @@ import { OrdersService } from './orders.service';
 import { TransactionInterceptor } from 'src/utils/interceptors/transactionInterceptor';
 
 @Controller('orders')
-  @UseInterceptors(TransactionInterceptor)
+@UseInterceptors(TransactionInterceptor)
 export class OrdersController {
   constructor(private ordersService: OrdersService) {}
 
   @Post()
   async placeOrder() {
-    return await this.ordersService.placeOrder('test', 'blah', 1);
+    return await this.ordersService.placeOrder('test', 'jack', 1000);
   }
 }
