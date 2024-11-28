@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { Invoice } from './invoice/invoice.entity';
 import { Inventory } from './inventory/inventory.entity';
+import { AccountBalance } from './accountBalance/accountBalance.entity';
 
 export const postgresDataSource = new DataSource({
   type: 'postgres',
@@ -9,7 +10,7 @@ export const postgresDataSource = new DataSource({
   username: 'postgres',
   password: 'postgres',
   database: 'test',
-  entities: [Invoice, Inventory],
+  entities: [Invoice, Inventory, AccountBalance],
   subscribers: [],
   migrations: [`${__dirname}/migrations/*.js`],
 });

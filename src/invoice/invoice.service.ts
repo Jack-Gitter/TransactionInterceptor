@@ -5,6 +5,6 @@ import { InvoiceDAO } from 'src/database/invoice/invoice.dao';
 export class InvoiceService {
   constructor(private invoiceDAO: InvoiceDAO) {}
   async provideInvoice(user: string, price: number) {
-    this.invoiceDAO.addInvoice(user, price);
+    await this.invoiceDAO.addInvoice(user, price);
   }
 }

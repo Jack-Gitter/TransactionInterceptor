@@ -1,11 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InventoryDAO } from 'src/database/inventory/inventory.dao';
 
 @Injectable()
 export class InventoryService {
   constructor(private inventoryDAO: InventoryDAO) {}
   async checkAndReduceStock(itemName: string) {
-    this.inventoryDAO.checkStock(itemName);
+    const stock = await this.inventoryDAO.getStock(itemName);
+    if (stock < 0) {
+      throw new NotFoundException(
+        'unable to process request. Not enough inventory',
+      );
+    }
     this.inventoryDAO.reduceStock(itemName);
   }
 }

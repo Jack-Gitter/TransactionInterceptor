@@ -12,7 +12,7 @@ export class OrdersService {
   ) {}
   async placeOrder(itemName: string, user: string, price: number) {
     this.inventoryService.checkAndReduceStock(itemName);
-    this.paymentService.chargePayment();
+    this.paymentService.checkAndChargePayment(user, price);
     this.invoiceService.provideInvoice(user, price);
   }
 }

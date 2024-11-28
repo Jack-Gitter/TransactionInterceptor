@@ -10,6 +10,7 @@ import { ClsModule } from 'nestjs-cls';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Invoice } from './database/invoice/invoice.entity';
 import { Inventory } from './database/inventory/inventory.entity';
+import { AccountBalanceDAOModule } from './database/accountBalance/accountBalance.dao.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { Inventory } from './database/inventory/inventory.entity';
     PaymentModule,
     OrdersModule,
     InvoiceDAOModule,
+    AccountBalanceDAOModule,
     InventoryDAOModule,
   ],
   controllers: [OrdersController],

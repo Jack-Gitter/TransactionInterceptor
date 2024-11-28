@@ -8,11 +8,12 @@ export class AccountBalanceDAO {
   constructor(cls: ClsService, dataSource: DataSource) {
     this.queryRunner = cls.get('connection') ?? dataSource.manager;
   }
-  async getAccountBalance(user: string): Promise<void> {
-    this.queryRunner.query(
+  async getAccountBalance(user: string): Promise<number> {
+    const res = this.queryRunner.query(
       'SELECT balance from AccountBalance WHERE user = $1',
       [user],
     );
+    return res[0].balance
   }
 
   async reduceAccountBalance(user: string, price: number): Promise<void> {
