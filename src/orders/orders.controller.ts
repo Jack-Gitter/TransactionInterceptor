@@ -1,12 +1,14 @@
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Post, UseInterceptors } from '@nestjs/common';
 import { OrdersService } from './orders.service';
+import { TransactionInterceptor } from 'src/utils/interceptors/transactionInterceptor';
 
 @Controller('orders')
+  @UseInterceptors(TransactionInterceptor)
 export class OrdersController {
   constructor(private ordersService: OrdersService) {}
 
   @Post()
-  placeOrder() {
-    this.ordersService.placeOrder('test', 'jack', 1);
+  async placeOrder() {
+    return await this.ordersService.placeOrder('test', 'blah', 1);
   }
 }

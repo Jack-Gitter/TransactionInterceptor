@@ -1,4 +1,7 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+} from '@nestjs/common';
 import { AccountBalanceDAO } from 'src/database/accountBalance/accountBalance.dao';
 
 @Injectable()

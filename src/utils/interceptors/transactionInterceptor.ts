@@ -5,7 +5,7 @@ import {
   CallHandler,
 } from '@nestjs/common';
 import { ClsService } from 'nestjs-cls';
-import { catchError, concatMap, finalize, Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { DataSource } from 'typeorm';
 
 @Injectable()
@@ -19,23 +19,31 @@ export class TransactionInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler,
   ): Promise<Observable<any>> {
+    console.log('in the interceptor');
     const queryRunner = this.dataSource.createQueryRunner();
     queryRunner.connect();
-    queryRunner.startTransaction();
+    await queryRunner.startTransaction();
+    console.log('starting transaction');
     const manager = queryRunner.manager;
     this.cls.set('connection', manager);
-    return next.handle().pipe(
-      concatMap(async (data) => {
-        await queryRunner.commitTransaction();
-        return data;
-      }),
-      catchError(async (error) => {
-        await queryRunner.rollbackTransaction();
-        throw error;
-      }),
-      finalize(async () => {
-        await queryRunner.release();
+    next.handle().pipe(
+      tap({
+        next: async (val) => {
+          console.log('comitting transaction');
+          await queryRunner.commitTransaction();
+          return val;
+        },
+        error: async (error) => {
+          console.log('rolling back transaction');
+          await queryRunner.rollbackTransaction();
+          throw error;
+        },
+        finalize: async () => {
+          console.log('releasing');
+          await queryRunner.release();
+        },
       }),
     );
+    return next.handle();
   }
 }

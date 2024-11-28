@@ -7,6 +7,7 @@ import { Inventory } from './inventory.entity';
 export class InventoryDAO {
   private queryRunner: EntityManager;
   constructor(cls: ClsService, dataSource: DataSource) {
+    console.log('in inventory dao');
     this.queryRunner = cls.get('connection') ?? dataSource.manager;
   }
 

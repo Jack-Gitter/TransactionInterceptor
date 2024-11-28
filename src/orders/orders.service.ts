@@ -11,8 +11,8 @@ export class OrdersService {
     private invoiceService: InvoiceService,
   ) {}
   async placeOrder(itemName: string, user: string, price: number) {
-    this.inventoryService.checkAndReduceStock(itemName);
-    this.paymentService.checkAndChargePayment(user, price);
-    this.invoiceService.provideInvoice(user, price);
+    await this.inventoryService.checkAndReduceStock(itemName);
+    await this.paymentService.checkAndChargePayment(user, price);
+    await this.invoiceService.provideInvoice(user, price);
   }
 }
