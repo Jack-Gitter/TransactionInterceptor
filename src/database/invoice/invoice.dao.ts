@@ -9,7 +9,7 @@ export class InvoiceDAO {
     this.queryRunner = cls.get('connection') ?? dataSource.manager;
   }
   async addInvoice(user: string, price: number): Promise<void> {
-    this.queryRunner.query('INSERT INTO invoice values ($1, $2, $3)', [
+    await this.queryRunner.query('INSERT INTO invoice values ($1, $2, $3)', [
       Math.floor(Math.random() * 1000000000),
       user,
       price,

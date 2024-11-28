@@ -7,6 +7,6 @@ export class OrdersController {
 
   @Post()
   placeOrder() {
-    this.ordersService.placeOrder('test', 'test', 2);
+    this.ordersService.placeOrder('test', 'jack', 1);
   }
 }
