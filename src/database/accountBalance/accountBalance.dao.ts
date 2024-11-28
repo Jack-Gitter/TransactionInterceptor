@@ -13,7 +13,7 @@ export class AccountBalanceDAO {
       'SELECT balance from AccountBalance WHERE user = $1',
       [user],
     );
-    return res[0].balance
+    return res[0]?.balance || -1;
   }
 
   async reduceAccountBalance(user: string, price: number): Promise<void> {
