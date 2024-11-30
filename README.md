@@ -1,3 +1,2 @@
-todos: 
-    set up database seeding, so that it is easy to test out
-    test out, and then done. then move on to the other way to do it without cls?
+This was a little simple project to create a transaction inteceptor, and to understand how to propegate transactions to the data layer without passing directly via functions
+This was also for better understanding of transaction boundaries. 
