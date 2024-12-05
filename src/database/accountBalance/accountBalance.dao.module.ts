@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AccountBalanceDAO } from './accountBalance.dao';
+import { accountBalanceProvider } from './accountBalance.provider';
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [AccountBalanceDAO],
-  exports: [AccountBalanceDAO],
+  providers: [...accountBalanceProvider],
+  exports: [...accountBalanceProvider],
 })
 export class AccountBalanceDAOModule {}
