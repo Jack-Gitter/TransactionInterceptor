@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Pool, PoolClient } from 'pg';
-import { ADAO } from '../ADAO';
 
 Injectable();
-export class InventoryDAO extends ADAO {
-  constructor(pool: Pool, client?: PoolClient) {
-    super(pool, client);
+export class InventoryDAO {
+  constructor(private connection: Pool | PoolClient) {
   }
   async getStock(itemName: string): Promise<number> {}
   async reduceStock(itemName: string): Promise<void> {}

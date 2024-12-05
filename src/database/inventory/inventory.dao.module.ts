@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { InventoryDAO } from './inventory.dao';
+import { inventoryDAOProvider } from './inventory.dao.provider';
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [InventoryDAO],
-  exports: [InventoryDAO],
+  providers: [...inventoryDAOProvider],
+  exports: [...inventoryDAOProvider],
 })
 export class InventoryDAOModule {}

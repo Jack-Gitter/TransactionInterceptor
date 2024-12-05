@@ -8,6 +8,6 @@ export class TransactionManager {
 
   // the end user must call repository.close() when done with use on transaction, that way the connection is closed!
   async getAccountBalanceDAOForTransaction(): Promise<AccountBalanceDAO> {
-    return new AccountBalanceDAO(this.pool, await this.pool.connect());
+    return new AccountBalanceDAO(await this.pool.connect());
   }
 }

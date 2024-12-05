@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { InvoiceDAO } from './invoice.dao';
+import { invoiceDAOProvider } from './invoice.dao.provider';
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [InvoiceDAO],
-  exports: [InvoiceDAO],
+  providers: [...invoiceDAOProvider],
+  exports: [...invoiceDAOProvider],
 })
 export class InvoiceDAOModule {}
