@@ -3,8 +3,15 @@ import { Pool, PoolClient } from 'pg';
 
 Injectable();
 export class InventoryDAO {
-  constructor(private connection: Pool | PoolClient) {
+  constructor(private connection: Pool | PoolClient) {}
+  async getStock(itemName: string): Promise<number> {
+    const res = await this.connection.query(
+      `SELECT count(*) FROM inventory WHERE "itemName" = $1`,
+      [itemName],
+    );
+    return res.rowCount;
   }
-  async getStock(itemName: string): Promise<number> {}
-  async reduceStock(itemName: string): Promise<void> {}
+  async reduceStock(itemName: string): Promise<void> {
+    await this.connection.query();
+  }
 }
