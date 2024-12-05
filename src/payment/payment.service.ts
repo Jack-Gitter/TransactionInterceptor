@@ -7,7 +7,7 @@ export class PaymentService {
   async checkAndChargePayment(user: string, price: number) {
     const balance = await this.accountBalanceDAO.getAccountBalance(user);
     if (price > balance) {
-      throw new NotAcceptableException('broke boy');
+      throw new NotAcceptableException('not enough money for transaction');
     }
     await this.accountBalanceDAO.reduceAccountBalance(user, price);
   }
