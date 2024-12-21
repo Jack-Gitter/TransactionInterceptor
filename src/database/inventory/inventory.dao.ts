@@ -1,15 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Pool, PoolClient } from 'pg';
-import { ADAO } from '../ADAO';
 
 Injectable();
-export class InventoryDAO extends ADAO {
-  constructor(connection: Pool | PoolClient) {
-    super(connection);
+export class InventoryDAO {
+  constructor(private connection: Pool | PoolClient) {
   }
   async getPrice(itemName: string): Promise<number> {
     const res = await this.connection.query(
-      `SELECT price FROM inventory WHERE "itemName = $1`,
+      `SELECT price FROM inventory WHERE "itemName" = $1`,
       [itemName],
     );
     if (!res.rows[0]) {

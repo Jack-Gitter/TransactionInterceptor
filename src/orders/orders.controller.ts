@@ -9,4 +9,14 @@ export class OrdersController {
   async placeOrder(@Body() reqBody: { user: string; itemName: string }) {
     return await this.ordersService.placeOrder(reqBody.itemName, reqBody.user);
   }
+
+  @Post('/transaction')
+  async placeOrderTransaction(
+    @Body() reqBody: { user: string; itemName: string },
+  ) {
+    return await this.ordersService.placeOrderTransaction(
+      reqBody.itemName,
+      reqBody.user,
+    );
+  }
 }
