@@ -11,6 +11,9 @@ export class TransactionManager {
     ...constructors: DAO<any>[]
   ): Promise<[any[], PoolClient]> {
     const connection = await this.pool.connect();
-    return [constructors.map((constructor) => new constructor(connection)), connection];
+    return [
+      constructors.map((constructor) => new constructor(connection)),
+      connection,
+    ];
   }
 }
