@@ -12,7 +12,7 @@ export class AccountBalanceDAO extends ADAO {
       `SELECT * from account_balance WHERE "user" = $1`,
       [user],
     );
-    return res.rows[0].balance;
+    return res.rows[0]?.balance || -1;
   }
   async reduceAccountBalance(user: string, price: number): Promise<void> {
     this.connection.query(
